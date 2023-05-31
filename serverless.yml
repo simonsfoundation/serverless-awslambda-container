@@ -17,14 +17,13 @@ provider:
 #  Disable automatic rollback by CloudFormation on failure. To be used for non-production environments.
 #  disableRollback: true
   tags:
-    "project-id": "MyProject"
-    "managed-by": "email@example.com"
-    "cost-center": "12345-05432"
+    "project-id": ${self:service}
+    "managed-by": ${env:TAG_MANAGED_BY}
+    "cost-center": ${env:TAG_COST_CENTER}
   stage: dev
   logRetentionInDays: 7
   environment:
     ENVIRON_VARIABLE_1: ${env:ENVIRON_VARIABLE_1}
-    ENVIRON_VARIABLE_2: ${env:ENVIRON_VARIABLE_2}
   ecr:
     images:
       serverless-awslambda-container:
