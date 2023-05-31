@@ -1,0 +1,12 @@
+__pycache__/
+.git/
+.serverless/
+.gitignore
+.dockerignore
+serverless.yml
+node_modules/
+package.json
+package-lock.json
+.env
+.env*
+venv/

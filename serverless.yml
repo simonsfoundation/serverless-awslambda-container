@@ -1,0 +1,40 @@
+# serverless.yml
+# reference: https://www.serverless.com/framework/docs/providers/aws/guide/serverless.yml
+
+service: serverless-awslambda-container
+useDotenv: true
+frameworkVersion: '3'
+configValidationMode: error
+deprecationNotificationMode: warn:summary
+
+
+provider:
+  name: aws
+  profile: ${env:AWS_PROFILE}
+  region: ${env:AWS_REGION}
+#  deploymentMethod: direct
+#  stackName: ${self:service}
+#  Disable automatic rollback by CloudFormation on failure. To be used for non-production environments.
+#  disableRollback: true
+  tags:
+    "project-id": "MyProject"
+    "managed-by": "email@example.com"
+    "cost-center": "12345-05432"
+  stage: dev
+  logRetentionInDays: 7
+  environment:
+    ENVIRON_VARIABLE_1: ${env:ENVIRON_VARIABLE_1}
+    ENVIRON_VARIABLE_2: ${env:ENVIRON_VARIABLE_2}
+  ecr:
+    images:
+      serverless-awslambda-container:
+        path: ./
+        platform: linux/amd64
+
+functions:
+  app:
+    image:
+      name: ${self:service}
+    timeout: 30
+    events:
+      - http: ANY /
