@@ -30,7 +30,7 @@ TAG_COST_CENTER="12345-05432"
 
 ## Deploy
 
-Add AWS credentials to `~/.aws/credentials` 
+Add AWS credentials to `~/.aws/credentials`
 
 To build container from dockerfile and deploy to ecr for lambda
 
@@ -39,6 +39,7 @@ sls deploy
 ```
 
 To remove everything created by serverless
+
 ```shell
 sls remove
 ```
@@ -60,9 +61,16 @@ RUN pip install \
     --target "${LAMBDA_TASK_ROOT}"
 ```
 
-You can add additional dependencies and build up your code within the `app` directory. 
+You can add additional dependencies and build up your code within the `app` directory.
 
 Lambda supports container images upto 10GB in size.
 
-
 Best of luck!
+
+## References
+
+[https://aws.amazon.com/blogs/aws/new-for-aws-lambda-container-image-support/](https://aws.amazon.com/blogs/aws/new-for-aws-lambda-container-image-support/)
+
+[https://docs.aws.amazon.com/lambda/latest/dg/images-create.html](https://docs.aws.amazon.com/lambda/latest/dg/images-create.html)
+
+[https://aws.amazon.com/blogs/opensource/simplify-development-using-aws-lambda-container-image-with-a-serverless-framework/](https://aws.amazon.com/blogs/opensource/simplify-development-using-aws-lambda-container-image-with-a-serverless-framework/)
