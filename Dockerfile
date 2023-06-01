@@ -1,16 +1,12 @@
+# Get a base image
+FROM public.ecr.aws/ubuntu/ubuntu:22.04
+
 # Set some defaults
 ARG LAMBDA_TASK_ROOT="/app"
 ARG LAMBDA_RUNTIME_DIR="/usr/local/bin"
 ARG PLATFORM="linux/amd64"
 
-# Get a base image
-FROM public.ecr.aws/ubuntu/ubuntu:22.04
-
-# Set env vars for aws lambda
-ENV LAMBDA_TASK_ROOT="${LAMBDA_TASK_ROOT}"
-ENV LAMBDA_RUNTIME_DIR="${LAMBDA_RUNTIME_DIR}"
-
-# Install aws-lambda-cpp build dependencies
+# Install python and aws-lambda-cpp build dependencies
 RUN apt-get -qq update && \
     apt-get -qq install -y \
     g++ \
@@ -44,7 +40,6 @@ WORKDIR ${LAMBDA_TASK_ROOT}
 ADD "https://github.com/aws/aws-lambda-runtime-interface-emulator/releases/latest/download/aws-lambda-rie" "/usr/bin/aws-lambda-rie"
 COPY entry.sh /
 RUN chmod 755 "/usr/bin/aws-lambda-rie" "/entry.sh"
-
 
 ENTRYPOINT [ "/entry.sh" ]
 CMD [ "app.handler" ]
